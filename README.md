@@ -1,4 +1,4 @@
-# Website Portofolio CV - Dimas Guntur
+# Website Portofolio CV - Dimas Guntur Prasetya Sumoro (202410370110152)
 
 Repository ini berisi *source code* untuk Website CV Portofolio pribadi saya. Proyek ini dibuat untuk memenuhi Tugas Mandiri 2.
 
