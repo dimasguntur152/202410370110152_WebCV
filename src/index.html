@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dimas Guntur Prasetya Sumoro</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="output.css">
+
+    <!-- CSS Kustom -->
+    <style>
+        .section-heading { margin-bottom: 30px; position: relative; }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(28px, 5vw, 48px);
+            line-height: 1.1; letter-spacing: -0.03em; font-weight: 700;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 50px; height: 4px;
+            background: var(--color-orange); margin-top: 12px;
+        }
+
+        /* --- HERO & TOMBOL --- */
+        .hero-title { font-size: clamp(36px, 6vw, 80px) !important; }
+        .typing-text {
+            font-family: var(--font-heading); font-size: clamp(16px, 2.5vw, 24px);
+            font-weight: 600; color: var(--color-grey); margin-top: 10px;
+            display: block; min-height: 35px;
+        }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+        .button {
+            padding: 12px 24px; font-weight: 700; font-size: 13px;
+            border: 2px solid var(--color-black); border-radius: 6px;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.3s ease; text-decoration: none;
+        }
+        .button.light { background: var(--color-black); color: var(--color-white); }
+        .button.light:hover { background: var(--color-white); color: var(--color-black); }
+        .button.primary { background: var(--color-orange); color: var(--color-black); }
+        .button.primary:hover { background: var(--color-black); color: var(--color-orange); }
+
+        /* --- HEADER MOBILE --- */
+        @media (max-width: 600px) {
+            .mobile-contact-button {
+                width: auto !important; border-radius: 20px !important;
+                padding: 0 15px !important; font-size: 12px !important;
+                font-weight: 600; gap: 8px;
+            }
+            .mobile-contact-button::after { content: 'KONTAK'; }
+        }
+
+        /* --- PENGALAMAN --- */
+        .experience-card {
+            padding: 24px 30px; background: var(--color-white);
+            border: 2px solid var(--color-black); box-shadow: 6px 6px 0 var(--color-orange);
+            border-radius: 12px;
+        }
+        .experience-card small { font-weight: 700; color: var(--color-orange); display: block; margin-bottom: 8px; font-size: 12px; }
+        .experience-card h3 { font-size: 20px; font-family: var(--font-heading); margin-bottom: 12px; }
+        .experience-card p { font-size: 14px; line-height: 1.6; color: var(--color-grey); }
+
+        /* --- PENDIDIKAN --- */
+        .timeline {
+            position: relative; border-left: 3px solid var(--color-black);
+            padding-left: 30px; margin-left: 15px; display: flex; flex-direction: column; gap: 30px;
+        }
+        .timeline-item { position: relative; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -39px; top: 0;
+            width: 15px; height: 15px; background: var(--color-orange);
+            border: 3px solid var(--color-black); border-radius: 50%;
+        }
+        .timeline-item small { font-weight: 700; font-size: 12px; color: var(--color-orange); margin-bottom: 5px; display: block; }
+        .timeline-item h3 { font-family: var(--font-heading); font-size: 20px; margin-bottom: 4px; }
+        .timeline-item p { font-size: 14px; color: var(--color-grey); }
+
+        /* --- KEMAMPUAN --- */
+        .ability-box {
+            background: var(--color-white); border: 2px solid var(--color-black);
+            border-radius: 12px; padding: 30px; box-shadow: 6px 6px 0 var(--color-orange);
+            margin-bottom: 24px;
+        }
+        .ability-box h3 {
+            font-family: var(--font-heading); font-size: 22px; margin-bottom: 16px;
+            padding-bottom: 10px; border-bottom: 2px dashed #ccc;
+        }
+        .ability-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .ability-list li {
+            font-size: 14px; color: var(--color-grey); line-height: 1.6;
+            padding-left: 20px; position: relative; display: block;
+        }
+        .ability-list li::before {
+            content: '•'; color: var(--color-orange); font-size: 20px;
+            position: absolute; left: 0; top: -2px;
+        }
+
+        /* --- PRESTASI & PELATIHAN (SUDAH DIRAPATKAN) --- */
+        .achievement-grid, .training-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;
+        }
+        .achievement-card, .training-card {
+            position: relative; padding: 24px; background: var(--color-white);
+            border: 2px solid var(--color-black); border-radius: 10px; cursor: pointer;
+            box-shadow: 4px 4px 0 var(--color-orange); transition: transform 0.2s, background 0.2s;
+            display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+            /* MENGHAPUS min-height AGAR TIDAK ADA SPACE KOSONG BESAR */
+        }
+        .achievement-card:hover, .training-card:hover { transform: translateY(-4px); background: var(--color-soft-aqua); }
+        
+        .achievement-year, .training-year { 
+            font-size: 12px; font-weight: 800; color: var(--color-orange); margin-bottom: 12px; 
+        }
+        .achievement-icon, .training-icon { 
+            position: absolute; top: 20px; right: 20px; font-size: 16px; color: var(--color-black); 
+        }
+        
+        .achievement-card h3, .training-card h3 {
+            font-family: var(--font-heading); font-size: 17px; line-height: 1.4; 
+            margin-bottom: 12px; color: var(--color-black);
+        }
+        .achievement-card p, .training-card p { 
+            font-size: 12px; color: var(--color-grey); line-height: 1.5; 
+        }
+
+        /* Responsif Mobile */
+        @media (max-width: 768px) {
+            .timeline { margin-left: 5px; padding-left: 20px; }
+            .timeline-item::before { left: -29px; width: 12px; height: 12px; }
+            .ability-box { padding: 20px; }
+            .achievement-grid, .training-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="bg-shape shape-one"></div>
+        <div class="bg-shape shape-two"></div>
+        <div class="bg-shape shape-three"></div>
+        <div class="bg-shape shape-four"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-contact">
+            <a href="mailto:dimasguntur2006@gmail.com">
+                <i class="fa-solid fa-envelope"></i>
+                <span>dimasguntur2006@gmail.com</span>
+            </a>
+            <a href="https://wa.me/6285319248710" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>+62 853-1924-8710</span>
+            </a>
+            <a href="https://instagram.com/dimgunn_" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-instagram"></i>
+                <span>@dimgunn_</span>
+            </a>
+            <!-- TIKTOK DITAMBAHKAN KEMBALI -->
+            <a href="https://tiktok.com/@dimgunn_" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>@dimgunn_</span>
+            </a>
+        </div>
+
+        <button class="mobile-contact-button" id="contactButton" aria-label="Kontak">
+            <i class="fa-solid fa-address-book"></i>
+        </button>
+
+        <button class="menu-button" id="menuButton" aria-label="Buka menu">
+            <span>MENU</span>
+            <span class="menu-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+    </header>
+
+    <!-- Contact Popup -->
+    <div class="contact-popup" id="contactPopup">
+        <a href="mailto:dimasguntur2006@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+            <div><small>EMAIL</small><span>dimasguntur2006@gmail.com</span></div>
+        </a>
+        <a href="https://wa.me/6285319248710" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-whatsapp"></i>
+            <div><small>WHATSAPP</small><span>+62 853-1924-8710</span></div>
+        </a>
+        <a href="https://instagram.com/dimgunn_" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-instagram"></i>
+            <div><small>INSTAGRAM</small><span>@dimgunn_</span></div>
+        </a>
+        <!-- TIKTOK DITAMBAHKAN KEMBALI -->
+        <a href="https://tiktok.com/@dimgunn_" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-tiktok"></i>
+            <div><small>TIKTOK</small><span>@dimgunn_</span></div>
+        </a>
+    </div>
+
+    <!-- Navigation Popup -->
+    <div class="menu-popup" id="menuPopup">
+        <a href="#home">Beranda</a>
+        <a href="#profil">Profil</a>
+        <a href="#pengalaman">Pengalaman</a>
+        <a href="#pendidikan">Pendidikan</a>
+        <a href="#project">Proyek</a>
+        <a href="#pelatihan">Pelatihan</a>
+        <a href="#kemampuan">Kemampuan</a>
+        <a href="#achievements">Prestasi</a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-container">
+                <div class="hero-photo-area">
+                    <div class="photo-frame">
+                        <img class="profile-image" src="assets/profile/dimas.jpg" alt="Dimas Guntur Prasetya Sumoro" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <div class="photo-placeholder">
+                            Tambahkan foto pada<br>assets/profile/dimas.jpg
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span>Dimas Guntur</span>
+                        <span>Prasetya Sumoro</span>
+                    </h1>
+                    <div class="hero-actions">
+                        <a href="#profil" class="button light">
+                            Jelajahi Profil <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                        <a href="#project" class="button primary">
+                            Lihat Proyek <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="profil">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-heading">
+                    <h2 class="section-title">PROFIL</h2>
+                </div>
+                <div class="profile-box">
+                    <p>
+                        Mahasiswa Program Studi S1 Informatika Universitas Muhammadiyah Malang semester 5 dengan IPK sementara 3,87, dengan fokus pengembangan kompetensi pada bidang Rekayasa Perangkat Lunak (RPL). Memiliki pemahaman dasar pemrograman Java, C++, dan Python serta kemampuan dasar dalam pembuatan website menggunakan HTML, CSS, dan JavaScript. Berpengalaman dalam pembuatan website, salah satunya Website Profil Dusun Krobyokan dalam kegiatan KKN. Memiliki kemampuan komunikasi yang baik, berpikir analitis, kerja sama tim, serta kemampuan beradaptasi dengan teknologi dan pengetahuan baru. Berkomitmen untuk terus meningkatkan kemampuan dan memperluas pengalaman di bidang Rekayasa Perangkat Lunak.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: 600; color: var(--color-black);">
+                        <i class="fa-solid fa-location-dot" style="color: var(--color-orange); margin-right: 8px;"></i> 
+                        Malang, Jawa Timur, Indonesia
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pengalaman">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-heading">
+                    <h2 class="section-title">PENGALAMAN</h2>
+                </div>
+                <div class="experience-list">
+                    <article class="experience-card">
+                        <small>JUL 2026 - AGU 2026</small>
+                        <h3>Divisi Humas — KKN MAs Kelompok 17</h3>
+                        <p>
+                            Berperan dalam Divisi Humas pada kegiatan Kuliah Kerja Nyata (KKN) MAs Kelompok 17 di Desa Jedong, dengan bertanggung jawab dalam menjalin komunikasi, menyampaikan informasi, serta mendukung kelancaran pelaksanaan kegiatan bersama masyarakat dan perangkat desa.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="pendidikan">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-heading">
+                    <h2 class="section-title">PENDIDIKAN</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <small>2024 — SEKARANG</small>
+                        <h3>Universitas Muhammadiyah Malang</h3>
+                        <p>S1 Informatika</p>
+                    </div>
+                    <div class="timeline-item">
+                        <small>2021 — 2024</small>
+                        <h3>MAN 1 Kendari</h3>
+                        <p>Jurusan IPA</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-heading">
+                    <h2 class="section-title">PROYEK</h2>
+                </div>
+                <div class="project-card">
+                    <div class="project-visual">
+                        <div class="browser">
+                            <div class="browser-top">
+                                <span class="browser-dot"></span>
+                                <span class="browser-dot"></span>
+                                <span class="browser-dot"></span>
+                            </div>
+                            <div class="browser-body">
+                                <small>WEBSITE PROYEK</small>
+                                <h3>Profil Dusun<br>Krobyokan</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p>
+                            Membuat website profil Dusun Krobyokan, Desa Jedong, Kecamatan Wagir, Kabupaten Malang, Jawa Timur, sebagai media informasi digital yang menyajikan informasi mengenai wilayah dan potensi dusun secara terstruktur.
+                        </p>
+                        <div class="project-meta">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="https://profildusunkrobyokan-desajedong.netlify.app" target="_blank" rel="noopener noreferrer" class="button primary" style="margin-top: 20px;">
+                            Kunjungi Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pelatihan">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-heading">
+                    <h2 class="section-title">PELATIHAN</h2>
+                </div>
+                <div class="training-grid" id="trainingGrid">
+                    <article class="training-card" data-certificate="assets/certificates/ai-ignition-training.jpg" data-title="AI Ignition Training" data-info="Juli 2025 · KUMPUL.ID & Ruang Kreasi Dedava" data-description="Pelatihan AI Opportunity Fund: Asia Pacific.">
+                        <span class="training-year">2025</span>
+                        <span class="training-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        <h3>AI Ignition Training</h3>
+                        <p>KUMPUL.ID & Ruang Kreasi Dedava</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="kemampuan">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-heading">
+                    <h2 class="section-title">KEMAMPUAN</h2>
+                </div>
+
+                <div class="ability-box">
+                    <h3><i class="fa-solid fa-code" style="color: var(--color-orange); margin-right: 10px;"></i> Hard Skill</h3>
+                    <ul class="ability-list">
+                        <li>Menguasai dasar pemrograman menggunakan Java, C++, dan Python.</li>
+                        <li>Memahami dasar pengembangan web menggunakan HTML, CSS, dan JavaScript.</li>
+                        <li>Memahami dasar basis data menggunakan MySQL dan Oracle Database.</li>
+                        <li>Memiliki pemahaman dasar dalam pengembangan aplikasi mobile.</li>
+                    </ul>
+                </div>
+
+                <div class="ability-box">
+                    <h3><i class="fa-solid fa-users" style="color: var(--color-orange); margin-right: 10px;"></i> Soft Skill</h3>
+                    <ul class="ability-list">
+                        <li>Memiliki kemampuan berpikir analitis dalam memahami dan menyelesaikan permasalahan.</li>
+                        <li>Mampu memecahkan masalah secara sistematis dan mencari solusi yang sesuai.</li>
+                        <li>Mampu berkomunikasi dengan baik dalam kegiatan akademik maupun kerja sama tim.</li>
+                        <li>Mampu bekerja sama dan berkolaborasi dalam menyelesaikan tugas dan kegiatan bersama.</li>
+                        <li>Mampu mengatur waktu dan menentukan prioritas dalam menyelesaikan berbagai tugas.</li>
+                        <li>Mampu beradaptasi dengan teknologi dan pengetahuan baru.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-heading">
+                    <h2 class="section-title">PRESTASI</h2>
+                </div>
+                <div class="achievement-grid">
+                    <article class="achievement-card" data-certificate="assets/certificates/nasyid-juara-1.jpg" data-title="Juara 1 Lomba Nasyid" data-info="Kemah Santri dan Porseni se-SULTRA 2023">
+                        <span class="achievement-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        <span class="achievement-year">2023</span>
+                        <h3>Juara 1 Lomba Nasyid</h3>
+                        <p>Klik untuk melihat sertifikat</p>
+                    </article>
+                    
+                    <article class="achievement-card" data-certificate="assets/certificates/student-talent-2023.jpg" data-title="Juara Harapan 1 Vocal Solo" data-info="Student Talent Kota Kendari 2023">
+                        <span class="achievement-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        <span class="achievement-year">2023</span>
+                        <h3>Juara Harapan 1 Vocal Solo</h3>
+                        <p>Klik untuk melihat sertifikat</p>
+                    </article>
+                    
+                    <article class="achievement-card" data-certificate="assets/certificates/diesnatalis-2025.jpg" data-title="Juara 1 Vocal Solo" data-info="Dies Natalis Informatika UMM 2025">
+                        <span class="achievement-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        <span class="achievement-year">2025</span>
+                        <h3>Juara 1 Vocal Solo</h3>
+                        <p>Klik untuk melihat sertifikat</p>
+                    </article>
+                    
+                    <article class="achievement-card" data-certificate="assets/certificates/diesnatalis-2026.jpg" data-title="Juara 1 Vocal Solo" data-info="Dies Natalis Informatika UMM 2026">
+                        <span class="achievement-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        <span class="achievement-year">2026</span>
+                        <h3>Juara 1 Vocal Solo</h3>
+                        <p>Klik untuk melihat sertifikat</p>
+                    </article>
+                    
+                    <article class="achievement-card" data-certificate="assets/certificates/rector-cup-2026.jpg" data-title="Juara 2 Singing Competition" data-info="Rector Cup UMM 2026">
+                        <span class="achievement-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        <span class="achievement-year">2026</span>
+                        <h3>Juara 2 Singing Competition</h3>
+                        <p>Klik untuk melihat sertifikat</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <span>© 2026 Dimas Guntur Prasetya Sumoro</span>
+        <span>Mahasiswa Informatika</span>
+    </footer>
+
+    <div class="modal" id="certificateModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Tutup">×</button>
+            <img class="certificate-image" id="certificateImage" src="" alt="Sertifikat">
+            <div class="certificate-info">
+                <small id="certificateInfo"></small>
+                <h3 id="certificateTitle"></h3>
+                <p id="certificateDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Utama -->
+    <script src="script.js" defer></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+</body>
+</html>
